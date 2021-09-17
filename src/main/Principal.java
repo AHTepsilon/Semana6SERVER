@@ -103,11 +103,26 @@ public class Principal extends PApplet
 							String line = reader.readLine();
 							System.out.println("Received message: " + line);
 							
-							String[] coords = line.split(":");
-							int x = Integer.parseInt(coords[0]);
-							int y = Integer.parseInt(coords[1]);
-							PVector vector = new PVector(x, y);
-							pos.add(vector);
+							if(line == "1")
+							{
+								y -= 1;
+								System.out.println(y);
+							}
+							if(line == "2")
+							{
+								y += 1;
+								System.out.println(y);
+							}
+							if(line == "3")
+							{
+								x -= 1;
+								System.out.println(x);
+							}
+							if(line == "4")
+							{
+								x += 1;
+								System.out.println(x);
+							}
 						}
 						
 					} catch (IOException e) {

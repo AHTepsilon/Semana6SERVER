@@ -73,13 +73,16 @@ public class Principal extends PApplet
 		noStroke();
 		circle(x, y, 50);
 		
+		//System.out.println(x + ", " + y);
 	}
 	
 	public void initServer()
 	{
+	
 		new Thread(
 				() ->
 				{
+					
 					try {
 						ipLocal = InetAddress.getLocalHost();
 						System.out.println("Starting port on ip " + ipLocal.getHostAddress());
@@ -101,28 +104,38 @@ public class Principal extends PApplet
 						{
 							System.out.println("Awaiting message...");
 							String line = reader.readLine();
-							System.out.println("Received message: " + line);
 							
+							String[] coords = line.split(":");
+							int xCord = Integer.parseInt(coords[0]);
+							int yCord = Integer.parseInt(coords[1]);
+							
+							System.out.println("Received message: " + xCord + " " + yCord);
+							
+							move(xCord, yCord);
+							
+							//move(lineConverted);
+
 							if(line == "1")
 							{
-								y -= 1;
-								System.out.println(y);
+								PVector vector = new PVector(x, y+5);
+								pos.add(vector);
 							}
 							if(line == "2")
 							{
-								y += 1;
-								System.out.println(y);
+								PVector vector = new PVector(x, y-5);
+								pos.add(vector);
 							}
 							if(line == "3")
 							{
-								x -= 1;
-								System.out.println(x);
+								PVector vector = new PVector(x-5, y);
+								pos.add(vector);
 							}
 							if(line == "4")
 							{
-								x += 1;
-								System.out.println(x);
+								PVector vector = new PVector(x+5, y);
+								pos.add(vector);
 							}
+
 						}
 						
 					} catch (IOException e) {
@@ -147,6 +160,12 @@ public class Principal extends PApplet
 					}
 				
 				}).start();
+	}
+	
+	public void move(int index, int index2)
+	{
+		x = index + x;
+		y = index2 + y;
 	}
 
 }

@@ -115,45 +115,18 @@ public class Principal extends PApplet
 								int Bcol = Integer.parseInt(coords[2]);
 							
 								System.out.println("Received message: " + xCord + " " + yCord + " " + Bcol);
-							
-								if(xCord <= 5 && yCord <= 5)
-								{
-									move(xCord, yCord);
-								}
-								else
-								{
-									r = xCord;
-									g = yCord;
-									b = Bcol;
-								}
 								
-							}catch(ArrayIndexOutOfBoundsException arrErr)
+								r = xCord;
+								g = yCord;
+								b = Bcol;
+							}
+							
+							catch(ArrayIndexOutOfBoundsException arrErr)
 							{
 								move(xCord, yCord);
 							}
 							
 							//move(lineConverted);
-
-							if(line == "1")
-							{
-								PVector vector = new PVector(x, y+5);
-								pos.add(vector);
-							}
-							if(line == "2")
-							{
-								PVector vector = new PVector(x, y-5);
-								pos.add(vector);
-							}
-							if(line == "3")
-							{
-								PVector vector = new PVector(x-5, y);
-								pos.add(vector);
-							}
-							if(line == "4")
-							{
-								PVector vector = new PVector(x+5, y);
-								pos.add(vector);
-							}
 
 						}
 						

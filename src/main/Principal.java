@@ -41,6 +41,8 @@ public class Principal extends PApplet
 	float x, y;
 	int r, g, b;
 	
+	int xCord, yCord;
+	
 	@Override
 	public void setup() //void Start
 	{
@@ -105,13 +107,30 @@ public class Principal extends PApplet
 							System.out.println("Awaiting message...");
 							String line = reader.readLine();
 							
-							String[] coords = line.split(":");
-							int xCord = Integer.parseInt(coords[0]);
-							int yCord = Integer.parseInt(coords[1]);
+							try
+							{
+								String[] coords = line.split(":");
+								xCord = Integer.parseInt(coords[0]);
+								yCord = Integer.parseInt(coords[1]);
+								int Bcol = Integer.parseInt(coords[2]);
 							
-							System.out.println("Received message: " + xCord + " " + yCord);
+								System.out.println("Received message: " + xCord + " " + yCord + " " + Bcol);
 							
-							move(xCord, yCord);
+								if(xCord <= 5 && yCord <= 5)
+								{
+									move(xCord, yCord);
+								}
+								else
+								{
+									r = xCord;
+									g = yCord;
+									b = Bcol;
+								}
+								
+							}catch(ArrayIndexOutOfBoundsException arrErr)
+							{
+								move(xCord, yCord);
+							}
 							
 							//move(lineConverted);
 
